@@ -48,6 +48,7 @@ function Dashboard() {
       icon: <MessageSquare className="w-8 h-8" />,
       path: "/playground",
       color: "from-blue-500 to-purple-600",
+      status: "active"
     },
     {
       title: "Generate Images",
@@ -55,6 +56,7 @@ function Dashboard() {
       icon: <Image className="w-8 h-8" />,
       path: "/generate-images",
       color: "from-green-500 to-teal-600",
+      status: "active"
     },
     {
       title: "Write Articles",
@@ -62,13 +64,7 @@ function Dashboard() {
       icon: <FileText className="w-8 h-8" />,
       path: "/write-article",
       color: "from-orange-500 to-red-600",
-    },
-    {
-      title: "Community Hub",
-      description: "Connect with other users, share projects, and explore community-driven AI content.",
-      icon: <Users className="w-8 h-8" />,
-      path: "/community",
-      color: "from-indigo-500 to-pink-600",
+      status: "active"
     },
     {
       title: "Resume Review",
@@ -76,6 +72,7 @@ function Dashboard() {
       icon: <FileText className="w-8 h-8" />,
       path: "/review-resume",
       color: "from-yellow-500 to-orange-600",
+      status: "active"
     },
     {
       title: "Background Removal",
@@ -83,7 +80,23 @@ function Dashboard() {
       icon: <Image className="w-8 h-8" />,
       path: "/remove-background",
       color: "from-purple-500 to-pink-600",
+      status: "active"
     },
+    {
+      title: "Object Removal",
+      description: "Remove unwanted objects from images with precision using AI technology.",
+      icon: <Zap className="w-8 h-8" />,
+      path: "/remove-object",
+      color: "from-red-500 to-pink-600",
+      status: "active"
+    },
+  ];
+
+  const stats = [
+    { label: "AI Interactions", value: "127", icon: <MessageSquare className="w-5 h-5" />, color: "text-blue-400" },
+    { label: "Images Generated", value: "23", icon: <Image className="w-5 h-5" />, color: "text-green-400" },
+    { label: "Articles Written", value: "8", icon: <FileText className="w-5 h-5" />, color: "text-orange-400" },
+    { label: "Days Active", value: "15", icon: <Zap className="w-5 h-5" />, color: "text-purple-400" },
   ];
 
   if (loading)

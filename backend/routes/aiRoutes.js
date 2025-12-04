@@ -165,10 +165,17 @@ router.post("/upload", upload.single("file"), async (req, res) => {
 // ==================== CHAT ENDPOINT ====================
 router.post("/chat", async (req, res) => {
   try {
+    console.log("📥 Request body:", req.body);
+
+    // More robust body validation
+    if (!req.body || typeof req.body !== 'object') {
+      return res.status(400).json({ success: false, message: "Invalid request body" });
+    }
+
     const { modelId, prompt, params, context, inputType, fileData } = req.body;
 
-    if (!modelId) {
-      return res.status(400).json({ success: false, message: "modelId required" });
+    if (!modelId || typeof modelId !== 'string') {
+      return res.status(400).json({ success: false, message: "modelId required and must be a string" });
     }
 
     const provider = modelId.startsWith("openrouter")
@@ -365,7 +372,9 @@ router.post("/chat", async (req, res) => {
 
   } catch (err) {
     console.error("❌ CHAT ERROR:", err.response?.data || err.message);
-    return res.status(500).json({ success: false, message: "Server error" });
+    console.error("❌ Full error:", err);
+    console.error("❌ Stack:", err.stack);
+    return res.status(500).json({ success: false, message: "Server error", error: err.message });
   }
 });
 
