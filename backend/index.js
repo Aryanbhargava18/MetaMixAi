@@ -31,6 +31,13 @@ app.use(
         return callback(null, true);
       }
       if (allowedOrigins.includes(origin)) return callback(null, true);
+
+      // Allow Vercel preview URLs
+      if (origin && origin.includes("-aryanbhargava18s-projects.vercel.app")) {
+        console.log("✅ CORS ALLOWED Vercel preview:", origin);
+        return callback(null, true);
+      }
+
       console.log("❌ CORS BLOCKED origin:", origin);
       return callback(new Error("CORS blocked"));
     },
