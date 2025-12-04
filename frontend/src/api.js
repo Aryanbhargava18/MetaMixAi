@@ -9,7 +9,7 @@ const api = axios.create({
 
 export const login = async (data) => {
   try {
-    const res = await api.post("/api/login", data);
+    const res = await api.post("/login", data);
     return res.data;
   } catch (error) {
     return { message: error.response?.data?.message || "Login failed" };
@@ -18,7 +18,7 @@ export const login = async (data) => {
 
 export const signup = async (data) => {
   try {
-    const res = await api.post("/api/signup", data);
+    const res = await api.post("/signup", data);
     return res.data;
   } catch (error) {
     return { message: error.response?.data?.message || "Signup failed" };
@@ -27,7 +27,7 @@ export const signup = async (data) => {
 
 export const getCurrentUser = async (token) => {
   try {
-    const res = await api.get("/api/me", {
+    const res = await api.get("/me", {
       headers: { Authorization: `Bearer ${token}` },
     });
     return res.data;
