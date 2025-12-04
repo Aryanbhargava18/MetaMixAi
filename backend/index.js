@@ -1,39 +1,61 @@
-// MUST load .env first (BEFORE requiring routes)
-console.log("Loading env...");
+// backend/index.js
 require("dotenv").config();
-console.log("JWT_SECRET is:", process.env.JWT_SECRET);
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-
-// Now require routes (they will get correct env values)
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require("./routes/authRoutes"); // keep your auth
+const aiRoutes = require("./routes/aiRoutes");     // marketplace & chat
+const chatRoutes = require("./routes/chatRoutes"); // chat CRUD
 
 const app = express();
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://metamixai.vercel.app"
-  ],
-  methods: ["GET", "POST"],
-  credentials: true
-}));
 
+// Allowed origins: include your local dev Vite ports and deployed origin
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5176",
+  "http://localhost:5177",
+  "http://localhost:3000",
+  "https://metamixai.vercel.app",
+  "https://metamix-backend.onrender.com"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow curl/postman/non-browser
+      if (origin && origin.startsWith("http://localhost:")) {
+        console.log("✅ CORS ALLOWED local origin:", origin);
+        return callback(null, true);
+      }
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      console.log("❌ CORS BLOCKED origin:", origin);
+      return callback(new Error("CORS blocked"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// JSON body parser
 app.use(express.json());
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ Connected to MongoDB'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
+// Connect to MongoDB (make sure MONGO_URI set)
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ MongoDB error:", err));
 
-// Base route
-app.get('/', (req, res) => {
-  res.send('🚀 Backend API is running!');
-});
+// root sanity
+app.get("/", (req, res) => res.send("🚀 Backend API is running!"));
 
-// Use auth routes
-app.use('/api', authRoutes);
+// Routes
+app.use("/api", authRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/chats", chatRoutes);
 
+// Start
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

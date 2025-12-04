@@ -1,14 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
-import AiTools from '../components/AiTools'
+import ModelExplorer from '../components/ModelExplorer'
 import Footer from '../components/Footer'
 function Home() {
   return (
     <div>
       <Navbar/>
       <Hero/>
-      <AiTools/>
+      <ModelExplorer/>
       <Footer/>
     </div>
   )

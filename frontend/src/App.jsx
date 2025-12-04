@@ -1,57 +1,70 @@
+// src/App.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
-import Home from "./pages/Home";
-import Layout from "./pages/Layout";
-import Dashboard from "./pages/Dashboard";
-import WriteArticle from "./pages/WriteArticle";
-import GenerateImages from "./pages/GenerateImages";
-import RemoveBackground from "./pages/RemoveBackground";
-import RemoveObject from "./pages/RemoveObject";
-import ReviewResume from "./pages/ReviewResume";
-import Community from "./pages/Community";
-import BlogTitle from "./pages/BlogTitle";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 
-function App() {
+import Home from "./pages/Home.jsx";
+import Playground from "./pages/Playground.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+
+import { ChatProvider } from "./Context/ChatContext";
+
+const App = () => {
   return (
-    <div>
-      <Toaster />
+    <ChatProvider>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: '#1e293b',
+            color: '#fff',
+            border: '1px solid #334155',
+          },
+          success: {
+            iconTheme: {
+              primary: '#10b981',
+              secondary: '#fff',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
+
       <Routes>
-        {/* Public */}
+        {/* Home Page */}
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
+
+        {/* Main Playground */}
+        <Route path="/playground" element={<Playground />} />
+
+        {/* Auth Pages */}
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-        {/* Tools */}
-        <Route path="/write-article" element={<WriteArticle />} />
-        <Route path="/blog-titles" element={<BlogTitle />} />
-        <Route path="/generate-images" element={<GenerateImages />} />
-        <Route path="/remove-background" element={<RemoveBackground />} />
-        <Route path="/remove-object" element={<RemoveObject />} />
-        <Route path="/review-resume" element={<ReviewResume />} />
+        {/* Protected Dashboard */}
+        <Route path="/ai" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
-        {/* Protected */}
+        {/* Catch-all 404 */}
         <Route
-          path="/ai"
+          path="*"
           element={
-            <ProtectedRoute>
-              <Layout />
-            </ProtectedRoute>
+            <div className="p-10 text-center text-xl">
+              404 — Page Not Found
+            </div>
           }
-        >
-          <Route index element={<Dashboard />} />
-          <Route path="community" element={<Community />} />
-        </Route>
-
-        {/* 404 */}
-        <Route path="*" element={<h2>404 - Page Not Found</h2>} />
+        />
       </Routes>
-    </div>
+    </ChatProvider>
   );
-}
+};
 
 export default App;

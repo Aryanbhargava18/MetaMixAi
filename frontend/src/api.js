@@ -1,49 +1,39 @@
-const API_URL = import.meta.env.VITE_API_URL;
-console.log("API_URL being used:", API_URL);
+import axios from "axios";
 
-// Signup
-export const signup = async (userData) => {
+const BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
+const api = axios.create({
+  baseURL: BASE,
+  withCredentials: true,
+});
+
+export const login = async (data) => {
   try {
-    const res = await fetch(`${API_URL}/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData),
-    });
-
-    if (!res.ok) throw new Error(`Signup failed: ${res.status}`);
-
-    return await res.json();
-  } catch (err) {
-    return { message: err.message };
+    const res = await api.post("/api/login", data);
+    return res.data;
+  } catch (error) {
+    return { message: error.response?.data?.message || "Login failed" };
   }
 };
 
-// Login
-export const login = async (credentials) => {
+export const signup = async (data) => {
   try {
-    const res = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    });
-
-    if (!res.ok) throw new Error(`Login failed: ${res.status}`);
-
-    return await res.json();
-  } catch (err) {
-    return { message: err.message };
+    const res = await api.post("/api/signup", data);
+    return res.data;
+  } catch (error) {
+    return { message: error.response?.data?.message || "Signup failed" };
   }
 };
 
-// NEW: Get current logged-in user
 export const getCurrentUser = async (token) => {
   try {
-    const res = await fetch(`${API_URL}/me`, {
+    const res = await api.get("/api/me", {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    return await res.json();
-  } catch (err) {
-    return { message: err.message };
+    return res.data;
+  } catch (error) {
+    return { message: error.response?.data?.message || "Failed to fetch user" };
   }
 };
+
+export default api;

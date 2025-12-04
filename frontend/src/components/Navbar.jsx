@@ -27,7 +27,7 @@ const Navbar = () => {
         </div>
 
         {/* Menu */}
-        <ul className="flex gap-8 text-xl flex-nowrap">
+<ul className="flex gap-8 text-xl flex-nowrap">
           <li
             className="relative group cursor-pointer whitespace-nowrap"
             onClick={() => navigate("/")}
@@ -42,21 +42,9 @@ const Navbar = () => {
 
           <li
             className="relative group cursor-pointer whitespace-nowrap"
-            onClick={() => navigate("/models")}
+            onClick={() => navigate("/playground")}
           >
-            Models
-            <span
-              className="absolute left-0 bottom-[-5px] w-0 h-1 rounded-xl 
-              bg-gradient-to-r from-blue-500 to-green-500 
-              transition-all duration-300 group-hover:w-full"
-            ></span>
-          </li>
-
-          <li
-            className="relative group cursor-pointer whitespace-nowrap"
-            onClick={() => navigate("/explore-ai")}
-          >
-            Explore AI
+            AI Chat
             <span
               className="absolute left-0 bottom-[-5px] w-0 h-1 rounded-xl 
               bg-gradient-to-r from-blue-500 to-green-500 

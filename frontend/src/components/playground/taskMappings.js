@@ -1,0 +1,21 @@
+export const TASK_TO_TAGS = {
+    "text-to-text": ["text-generation", "chat", "llm", "assistant"],
+    "summarization": ["summarization", "text-summarization"],
+    "translation": ["translation"],
+    "image-to-text": ["image-to-text", "vision", "captioning"],
+    "text-to-image": ["text-to-image", "image-generation", "diffusion"],
+    "image-to-image": ["image-to-image", "diffusion"],
+    "speech-to-text": ["asr", "stt", "speech-recognition", "whisper"],
+    "text-to-speech": ["tts", "speech-generation"],
+    "text-embedding": ["embedding", "embeddings"],
+    "content-moderation": ["moderation", "safety"],
+    "search": ["reranker", "embedding"],
+    "text-to-video": ["video-generation", "text-to-video"],
+    "image-to-video": ["video", "image-to-video"],
+    "text-to-audio": ["audio-generation"],
+    "audio-to-audio": ["audio", "sound"],
+    "text-to-3d": ["3d", "3d-generation"],
+    "image-to-3d": ["3d", "image-to-3d"],
+    "pdf-to-text": ["document", "ocr", "pdf", "layout", "reader"],
+  };
+  
