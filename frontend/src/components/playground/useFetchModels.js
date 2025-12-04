@@ -9,13 +9,13 @@ export default function useFetchModels() {
   useEffect(() => {
     async function loadModels() {
       try {
-        const res = await api.get("/api/ai/models");
+        const res = await api.get("/ai/models");
 
         const list = res.data?.models || [];
 
         console.log("🔥 FINAL MODELS RECEIVED:", list.length);
 
-        setModels(list); 
+        setModels(list);
       } catch (err) {
         console.error("❌ Model Load Error:", err);
         setError(err.message);
