@@ -41,7 +41,7 @@ export function ChatProvider({ children }) {
     }));
 
     try {
-      const res = await api.post("/ai/chat", {
+      const res = await api.post("/chat", {
         modelId: selectedModel.id,
         prompt,
         history,
