@@ -84,7 +84,7 @@ router.get("/models", async (req, res) => {
       axios.get(OPENROUTER_LIST_URL, {
         headers: {
           Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-          "HTTP-Referer": "http://localhost:5173",
+          "HTTP-Referer": process.env.APP_URL || "http://localhost:5173",
           "X-Title": "Metamix AI",
         },
       }),
@@ -205,7 +205,7 @@ router.post("/chat", async (req, res) => {
           const out = await axios.post(OPENROUTER_CHAT_URL, payload, {
             headers: {
               Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-              "HTTP-Referer": "http://localhost:5173",
+              "HTTP-Referer": process.env.APP_URL || "http://localhost:5173",
               "X-Title": "Metamix AI",
             },
           });
@@ -225,7 +225,7 @@ router.post("/chat", async (req, res) => {
           const out = await axios.post(OPENROUTER_CHAT_URL, payload, {
             headers: {
               Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-              "HTTP-Referer": "http://localhost:5173",
+              "HTTP-Referer": process.env.APP_URL || "http://localhost:5173",
               "X-Title": "Metamix AI",
             },
             responseType: 'arraybuffer'
@@ -265,7 +265,7 @@ router.post("/chat", async (req, res) => {
           const out = await axios.post(OPENROUTER_CHAT_URL, payload, {
             headers: {
               Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-              "HTTP-Referer": "http://localhost:5173",
+              "HTTP-Referer": process.env.APP_URL || "http://localhost:5173",
               "X-Title": "Metamix AI",
             },
           });
@@ -292,7 +292,7 @@ router.post("/chat", async (req, res) => {
           const out = await axios.post(OPENROUTER_CHAT_URL, payload, {
             headers: {
               Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-              "HTTP-Referer": "http://localhost:5173",
+              "HTTP-Referer": process.env.APP_URL || "http://localhost:5173",
               "X-Title": "Metamix AI",
             },
           });
@@ -325,7 +325,7 @@ router.post("/chat", async (req, res) => {
           const out = await axios.post(OPENROUTER_CHAT_URL, payload, {
             headers: {
               Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-              "HTTP-Referer": "http://localhost:5173",
+              "HTTP-Referer": process.env.APP_URL || "http://localhost:5173",
               "X-Title": "Metamix AI",
             },
           });
