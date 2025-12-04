@@ -48,7 +48,7 @@ export default function ChatInput({
     const toastId = toast.loading("Uploading & extracting text...");
 
     try {
-      const res = await api.post("/api/ai/upload", formData, {
+      const res = await api.post("/ai/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

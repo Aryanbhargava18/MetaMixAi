@@ -5,7 +5,7 @@ import { Search, Filter, ArrowRight, Loader2 } from "lucide-react";
 
 const ModelExplorer = () => {
   const navigate = useNavigate();
-  const { models, loading, error } = useFetchModels("/api/ai/models");
+  const { models, loading, error } = useFetchModels("/ai/models");
   const [search, setSearch] = useState("");
   const [selectedType, setSelectedType] = useState("all");
 

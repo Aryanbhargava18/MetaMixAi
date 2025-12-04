@@ -15,7 +15,7 @@ import ModelGrid from "../components/playground/ModelGrid";
 import ChatArea from "../components/playground/ChatArea";
 import ParameterPanel from "../components/playground/ParameterPanel";
 
-const MODELS_ENDPOINT = "/api/ai/models";
+const MODELS_ENDPOINT = "/ai/models";
 
 export default function Playground() {
   // Fetch HuggingFace + Local models
