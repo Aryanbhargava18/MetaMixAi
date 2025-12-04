@@ -18,7 +18,8 @@ const allowedOrigins = [
   "http://localhost:5177",
   "http://localhost:3000",
   "https://metamixai.vercel.app",
-  "https://metamix-backend.onrender.com"
+  "https://metamix-backend.onrender.com",
+  "https://meta-mix-5ui6d42my-aryanbhargava18s-projects.vercel.app",
 ];
 
 app.use(
