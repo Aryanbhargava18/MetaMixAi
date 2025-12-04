@@ -184,7 +184,13 @@ router.post("/chat", async (req, res) => {
 
     const model = modelId.replace(`${provider}:`, "");
     const modelType = detectCategory(modelId, "");
-
+    if (provider === "openrouter" && !model.includes(":free")) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "This model requires a paid OpenRouter plan. Please select a free model."
+      });
+    }
     let response = { type: "text", content: "" };
 
     // Handle different model types
